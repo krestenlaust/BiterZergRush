@@ -29,7 +29,9 @@ namespace BiterZergRushForms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBoxGameDraw = new System.Windows.Forms.PictureBox();
+            this.timerGameLoop = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameDraw)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,6 +46,10 @@ namespace BiterZergRushForms
             this.pictureBoxGameDraw.TabStop = false;
             this.pictureBoxGameDraw.Click += new System.EventHandler(this.pictureBoxBiter1_Click);
             this.pictureBoxGameDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGameDraw_Paint);
+            // 
+            // timerGameLoop
+            // 
+            this.timerGameLoop.Tick += new System.EventHandler(this.timerGameLoop_Tick);
             // 
             // FormMain
             // 
@@ -70,6 +76,7 @@ namespace BiterZergRushForms
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxGameDraw;
+        private System.Windows.Forms.Timer timerGameLoop;
     }
 }
 
