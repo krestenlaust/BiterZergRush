@@ -19,7 +19,18 @@ namespace BiterZergRushForms
                 {
                     Rectangle spriteArea = new Rectangle(x * spriteWidth, y * spriteHeight, spriteWidth, spriteHeight);
 
-                    sprites[i++] = spritesheet.Clone(spriteArea, spritesheet.PixelFormat);
+                    Bitmap target = new Bitmap(spriteArea.Width, spriteArea.Height);
+
+                    using (Graphics g = Graphics.FromImage(target))
+                    {
+                        g.DrawImage(
+                            spritesheet,
+                            new Rectangle(0, 0, target.Width, target.Height),
+                            spriteArea,
+                            GraphicsUnit.Pixel);
+                    }
+                    sprites[i++] = target;
+                    //sprites[i++] = spritesheet.Clone(spriteArea, spritesheet.PixelFormat);
                 }
             }
         }

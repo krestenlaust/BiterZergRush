@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,26 +8,23 @@ namespace BiterZergRushForms
     public partial class FormMain : Form
     {
         // Program
-        BiterRunSpritesheet biterRun;
         const int manualMoveMultiplier = 50;
         const int frameInterval = 1000 / 60;
         DateTime previousTime;
 
-        // Biter general
-        const float animationInterval = 250f / 1000f;
-        const float movementPerFrame = 10;
-        readonly GamePoint spawnPoint = new GamePoint(10, 10);
+        // Engine general
+        readonly List<GameEntity> entitites = new List<GameEntity>();
+        float timeSinceLastRefreshedActiveWindow;
+        IntPtr targetWindowHandle;
+        Rectangle targetWindowRectangle;
 
-        // Biter specifics
-        int biterAnimationIndex = 0;
-        int biterRotation = 4;
-        GamePoint biterLocation;
-        GamePoint animationStartLocation;
-        GamePoint animationEndLocation;
-        float timeSinceLastAnimation;
+        // Biter general
+        BiterEntity controlledBiter;
+        readonly GameVector spawnPoint = new GameVector(10, 10);
 
         private void pictureBoxBiter1_Click(object sender, EventArgs e)
         {
+
         }
 
         public FormMain()
@@ -36,14 +34,17 @@ namespace BiterZergRushForms
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            this.Bounds = Screen.PrimaryScreen.Bounds;
+            Bounds = Screen.PrimaryScreen.Bounds;
+            WindowState = FormWindowState.Maximized;
 
-            biterRun = new BiterRunSpritesheet(Properties.Resources.biter_run_01,
+            BiterEntity.BiterRunSpritesheet.Setup(
+                Properties.Resources.biter_run_01,
                 Properties.Resources.biter_run_02,
                 Properties.Resources.biter_run_03,
                 Properties.Resources.biter_run_04);
 
-            biterLocation = spawnPoint;
+            controlledBiter = new BiterEntity() { Location = spawnPoint };
+            entitites.Add(controlledBiter);
 
             timerGameLoop.Interval = frameInterval;
             timerGameLoop.Start();
@@ -53,27 +54,27 @@ namespace BiterZergRushForms
         {
             if (e.KeyCode == Keys.Space)
             {
-                animationEndLocation = spawnPoint;
+                controlledBiter.Location = spawnPoint;
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                biterRotation = (biterRotation + 1) % 16;
+                rotating = false;
             }
             else if (e.KeyCode == Keys.Up)
             {
-                animationEndLocation -= new GamePoint(0, 1 * manualMoveMultiplier);
+                controlledBiter.Location -= new GameVector(0, 1 * manualMoveMultiplier);
             }
             else if (e.KeyCode == Keys.Down)
             {
-                animationEndLocation += new GamePoint(0, 1 * manualMoveMultiplier);
+                controlledBiter.Location += new GameVector(0, 1 * manualMoveMultiplier);
             }
             else if (e.KeyCode == Keys.Left)
             {
-                animationEndLocation -= new GamePoint(1 * manualMoveMultiplier, 0);
+                controlledBiter.Location -= new GameVector(1 * manualMoveMultiplier, 0);
             }
             else if (e.KeyCode == Keys.Right)
             {
-                animationEndLocation += new GamePoint(1 * manualMoveMultiplier, 0);
+                controlledBiter.Location += new GameVector(1 * manualMoveMultiplier, 0);
             }
             else
             {
@@ -85,9 +86,18 @@ namespace BiterZergRushForms
 
         private void pictureBoxGameDraw_Paint(object sender, PaintEventArgs e)
         {
-            Bitmap biterImage = biterRun.GetBiter(biterAnimationIndex, biterRotation);
+            foreach (var item in entitites)
+            {
+                Image sprite = item.Sprite;
 
-            e.Graphics.DrawImage(biterImage, biterLocation);
+                int spriteWidth = (int)(sprite.Width * item.Scale);
+                int spriteHeight = (int)(sprite.Height * item.Scale);
+
+                float locX = item.Location.X - (spriteWidth * 0.5f);
+                float locY = item.Location.Y - (spriteHeight * 0.5f);
+                
+                e.Graphics.DrawImage(sprite, locX, locY, spriteWidth, spriteHeight);
+            }
         }
 
         private void timerGameLoop_Tick(object sender, EventArgs e)
@@ -98,32 +108,41 @@ namespace BiterZergRushForms
             previousTime = currentTime;
 
             Console.WriteLine(deltaSeconds);
+            timeSinceLastRefreshedActiveWindow += deltaSeconds;
 
-            // code ...
-            timeSinceLastAnimation += deltaSeconds;
-
-            float lerpValue = timeSinceLastAnimation / animationInterval;
-            lerpValue = Math.Min(1, lerpValue);
-
-            // interpolate biter position.
-            biterLocation = GamePoint.Lerp(animationStartLocation, animationEndLocation, lerpValue);
-
-            // if time passed for whole frame, then swap frame.
-            if (timeSinceLastAnimation > animationInterval)
+            if (timeSinceLastRefreshedActiveWindow >= 3)
             {
-                // reset lerp values
-                timeSinceLastAnimation = 0;
-                biterLocation = animationEndLocation;
-                animationStartLocation = biterLocation;
+                targetWindowHandle = NativeFunctions.GetForegroundWindow();
 
-                // swap to next animation frame
-                biterAnimationIndex = (biterAnimationIndex + 1) % 16;
-                // set new end location
-                animationEndLocation = biterLocation + new GamePoint(movementPerFrame, 0);
+                timeSinceLastRefreshedActiveWindow = 0;
+            }
+
+            NativeFunctions.GetWindowRect(targetWindowHandle, out NativeFunctions.RECT lpRect);
+            targetWindowRectangle = lpRect;
+            controlledBiter.MoveTo(new GameVector(targetWindowRectangle.Location) + new GameVector(targetWindowRectangle.Width / 2, targetWindowRectangle.Height / 2));
+
+            if (rotating)
+            {
+                controlledBiter.Rotation += (float)(2 * Math.PI / 8) * deltaSeconds;
+            }
+
+            foreach (var item in entitites)
+            {
+                item.OnUpdate(deltaSeconds);
             }
 
             // rendering
             pictureBoxGameDraw.Invalidate();
+        }
+
+        bool rotating = false;
+
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                rotating = true;
+            }
         }
     }
 }

@@ -37,6 +37,7 @@ namespace BiterZergRushForms
             // 
             // pictureBoxGameDraw
             // 
+            this.pictureBoxGameDraw.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.pictureBoxGameDraw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBoxGameDraw.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxGameDraw.Location = new System.Drawing.Point(0, 0);
@@ -55,6 +56,7 @@ namespace BiterZergRushForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.pictureBoxGameDraw);
             this.DoubleBuffered = true;
@@ -64,9 +66,9 @@ namespace BiterZergRushForms
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form1";
             this.TopMost = true;
-            this.TransparencyKey = System.Drawing.SystemColors.Control;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.TransparencyKey = System.Drawing.SystemColors.ButtonShadow;
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameDraw)).EndInit();
             this.ResumeLayout(false);
