@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BiterZergRushForms.Entities;
@@ -8,12 +9,11 @@ namespace BiterZergRushForms
     public class BiterGame : Game
     {
         const int manualMoveMultiplier = 50;
+        readonly Dictionary<IntPtr, WindowEntity> windows = new Dictionary<IntPtr, WindowEntity>();
         readonly GameVector spawnPoint = new GameVector(10, 10);
         bool rotating = false;
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
-        IntPtr targetWindowHandle;
-        Rectangle targetWindowRectangle;
 
         public override void OnKeyDown(KeyEventArgs keyEvent)
         {
@@ -57,14 +57,10 @@ namespace BiterZergRushForms
 
         public override void OnLoad()
         {
-            BiterEntity.BiterRunSpritesheet.Setup(
-                Properties.Resources.biter_run_01,
-                Properties.Resources.biter_run_02,
-                Properties.Resources.biter_run_03,
-                Properties.Resources.biter_run_04);
-
             controlledBiter = new BiterEntity() { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(10, 5) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(15, 15) });
         }
 
         public override void OnUpdate(float deltaSeconds)
@@ -73,14 +69,17 @@ namespace BiterZergRushForms
 
             if (timeSinceLastRefreshedActiveWindow >= 3)
             {
-                targetWindowHandle = NativeFunctions.GetForegroundWindow();
+                IntPtr windowHandle = NativeFunctions.GetForegroundWindow();
+                if (!windows.ContainsKey(windowHandle))
+                {
+                    WindowEntity windowEntity = new WindowEntity(windowHandle);
+                    Engine.Instantiate(windowEntity);
+
+                    windows[windowHandle] = windowEntity;
+                }
 
                 timeSinceLastRefreshedActiveWindow = 0;
             }
-
-            NativeFunctions.GetWindowRect(targetWindowHandle, out NativeFunctions.RECT lpRect);
-            targetWindowRectangle = lpRect;
-            controlledBiter.MoveTo(new GameVector(targetWindowRectangle.Location) + new GameVector(targetWindowRectangle.Width / 2, targetWindowRectangle.Height / 2));
 
             if (rotating)
             {

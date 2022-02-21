@@ -63,6 +63,46 @@ namespace BiterZergRushForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap biter_attack_01 {
+            get {
+                object obj = ResourceManager.GetObject("biter_attack_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap biter_attack_02 {
+            get {
+                object obj = ResourceManager.GetObject("biter_attack_02", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap biter_attack_03 {
+            get {
+                object obj = ResourceManager.GetObject("biter_attack_03", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap biter_attack_04 {
+            get {
+                object obj = ResourceManager.GetObject("biter_attack_04", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap biter_run_01 {
             get {
                 object obj = ResourceManager.GetObject("biter_run_01", resourceCulture);

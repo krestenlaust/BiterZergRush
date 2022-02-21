@@ -11,6 +11,7 @@ namespace BiterZergRushForms
         private static Game gameInstance;
         static DateTime previousTime;
         static readonly List<GameEntity> entitites = new List<GameEntity>();
+        static readonly List<GameEntity> destroyedEntitites = new List<GameEntity>();
 
         public static void SetupGame(Game game)
         {
@@ -24,18 +25,41 @@ namespace BiterZergRushForms
             {
                 Image sprite = item.Sprite;
 
-                if (sprite is null)
+                int spriteWidth = 0;
+                int spriteHeight = 0;
+
+                float locX = item.Location.X;
+                float locY = item.Location.Y;
+
+                if (!(sprite is null))
+                {
+                    spriteWidth = (int)(sprite.Width * item.Scale);
+                    spriteHeight = (int)(sprite.Height * item.Scale);
+
+                    graphics.DrawImage(sprite, locX - spriteWidth * 0.5f, locY - spriteHeight * 0.5f, spriteWidth, spriteHeight);
+                }
+
+                if (item.Health == item.MaxHealth || item.MaxHealth == 0)
                 {
                     continue;
                 }
 
-                int spriteWidth = (int)(sprite.Width * item.Scale);
-                int spriteHeight = (int)(sprite.Height * item.Scale);
+                Bitmap healthbarSprite = HealthbarSprite.GenerateHealthbar(Math.Max((int)Math.Round(item.Health), 0), item.MaxHealth);
+                const float healthbarScale = 2;
+                int healthbarLocX = (int)(locX - healthbarSprite.Width * 0.5f * healthbarScale);
+                int healthbarLocY = (int)(locY + spriteHeight * 0.5f);
+                graphics.DrawImage(healthbarSprite, healthbarLocX, healthbarLocY, healthbarSprite.Width * healthbarScale, healthbarSprite.Height * healthbarScale);
+            }
+        }
 
-                float locX = item.Location.X - (spriteWidth * 0.5f);
-                float locY = item.Location.Y - (spriteHeight * 0.5f);
-
-                graphics.DrawImage(sprite, locX, locY, spriteWidth, spriteHeight);
+        public static IEnumerable<T> GetEntititesByType<T>() where T : GameEntity
+        {
+            foreach (var item in entitites)
+            {
+                if (item is T itemCast)
+                {
+                    yield return itemCast;
+                }
             }
         }
 
@@ -53,6 +77,14 @@ namespace BiterZergRushForms
             {
                 item.OnUpdate(deltaSeconds);
             }
+
+            foreach (var item in destroyedEntitites)
+            {
+                item.OnDestroy();
+                entitites.Remove(item);
+            }
+
+            destroyedEntitites.Clear();
         }
 
         public static void KeyDown(KeyEventArgs keyEvent) => gameInstance.OnKeyDown(keyEvent);
@@ -62,6 +94,11 @@ namespace BiterZergRushForms
         public static void Instantiate(GameEntity entity)
         {
             entitites.Add(entity);
+        }
+
+        public static void Destroy(GameEntity entity)
+        {
+            destroyedEntitites.Add(entity);
         }
     }
 }

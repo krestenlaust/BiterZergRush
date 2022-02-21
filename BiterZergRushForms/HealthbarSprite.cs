@@ -28,12 +28,10 @@ namespace BiterZergRushForms
                 for (int i = 0; i < total; i++)
                 {
                     Rectangle targetRect = new Rectangle(i * cellLength, 0, cellLength, cellLength);
-                    Bitmap sourceImage;
-
-                    sourceImage = i < green ? cellGreen : cellGrey;
+                    Bitmap sourceImage = i < green ? cellGreen : cellGrey;
 
                     g.DrawImage(
-                        healthbar,
+                        sourceImage,
                         targetRect,
                         new Rectangle(0, 0, sourceImage.Width, sourceImage.Height),
                         GraphicsUnit.Pixel);

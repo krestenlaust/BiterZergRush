@@ -29,6 +29,7 @@ namespace BiterZergRushForms
                             spriteArea,
                             GraphicsUnit.Pixel);
                     }
+
                     sprites[i++] = target;
                 }
             }

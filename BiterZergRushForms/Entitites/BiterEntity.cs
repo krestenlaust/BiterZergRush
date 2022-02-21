@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace BiterZergRushForms.Entities
@@ -26,13 +28,18 @@ namespace BiterZergRushForms.Entities
         float timeSinceFrameSwap = 0;
         GameVector movementStart;
         GameVector movementEnd;
+        WindowEntity targetWindow = null;
 
         float timeSinceTargetSet = 0;
         float totalTravelTime = 0;
+        float timeSinceWindowSelected = 0;
+        bool attacking = false;
 
         public BiterEntity()
         {
             Scale = 0.5f;
+            MaxHealth = 10;
+            Health = 10;
         }
 
         GameVector internalLocation;
@@ -49,7 +56,14 @@ namespace BiterZergRushForms.Entities
         public override Image Sprite {
             get
             {
-                return BiterRunSpritesheet.GetBiter(animationIndex, ConvertRadiansTo16thCardinal(Rotation));
+                if (attacking)
+                {
+                    return BiterAttackSpritesheet.GetBiter(animationIndex, ConvertRadiansTo16thCardinal(Rotation));
+                }
+                else
+                {
+                    return BiterRunSpritesheet.GetBiter(animationIndex, ConvertRadiansTo16thCardinal(Rotation));
+                }
             }
         }
 
@@ -61,6 +75,11 @@ namespace BiterZergRushForms.Entities
         private static int ConvertRadiansTo16thCardinal(float radians)
         {
             return ((int)Math.Round(radians / (Math.PI * 2) * 16)) % 16;
+        }
+
+        public void Attack(GameEntity entity)
+        {
+            
         }
 
         public void MoveTo(GameVector position)
@@ -82,6 +101,7 @@ namespace BiterZergRushForms.Entities
         {
             timeSinceFrameSwap += deltaSeconds;
             timeSinceTargetSet += deltaSeconds;
+            timeSinceWindowSelected += deltaSeconds;
 
             float lerpValue = timeSinceTargetSet / totalTravelTime;
             lerpValue = Math.Min(1, lerpValue);
@@ -103,22 +123,95 @@ namespace BiterZergRushForms.Entities
                 timeSinceFrameSwap = 0;
 
                 // swap to next animation frame
-                animationIndex = (animationIndex + 1) % 16;
+                animationIndex = (animationIndex + 1) % (attacking ? 11 : 16);
+            }
+
+            if (timeSinceWindowSelected >= 3)
+            {
+                timeSinceWindowSelected = 0;
+
+                WindowEntity shortestWindow = null;
+                float? shortestDistance = null;
+                foreach (var item in Engine.GetEntititesByType<WindowEntity>())
+                {
+                    float distance = GameVector.Distance(Location, item.Location);
+                    if (distance < 0.1f)
+                    {
+                        continue;
+                    }
+
+                    if (shortestDistance is null || distance < shortestDistance.Value)
+                    {
+                        shortestDistance = distance;
+                        shortestWindow = item;
+                    }
+                }
+
+                targetWindow = shortestWindow;
+            }
+
+            if (!(targetWindow is null))
+            {
+                bool previousAttack = attacking;
+                attacking = GameVector.Distance(Location, targetWindow.Location) < 2;
+
+                if (previousAttack != attacking)
+                {
+                    timeSinceFrameSwap = AnimationIntervalSecond;
+                    animationIndex = 0;
+                }
+
+                if (attacking)
+                {
+                    targetWindow.Health -= deltaSeconds;
+                }
+                else
+                {
+                    MoveTo(targetWindow.Location);
+                }
+            }
+        }
+
+        public static class BiterAttackSpritesheet
+        {
+            readonly static SpritesheetImage[] biterAttack;
+            private const int BiterAnimationFrameCount = 11;
+
+            static BiterAttackSpritesheet()
+            {
+                biterAttack = new SpritesheetImage[]
+                {
+                    new SpritesheetImage(Properties.Resources.biter_attack_01, 11, 4),
+                    new SpritesheetImage(Properties.Resources.biter_attack_02, 11, 4),
+                    new SpritesheetImage(Properties.Resources.biter_attack_03, 11, 4),
+                    new SpritesheetImage(Properties.Resources.biter_attack_04, 11, 4)
+                };
+            }
+
+            public static Bitmap GetBiter(int animationFrameIndex, int rotation)
+            {
+                int cardinalDirection = Math.DivRem(rotation, 4, out int quarterDivision);
+
+                int biterAnimationOffset = quarterDivision * BiterAnimationFrameCount;
+
+                return biterAttack[cardinalDirection][biterAnimationOffset + animationFrameIndex];
             }
         }
 
         public static class BiterRunSpritesheet
         {
-            private static SpritesheetImage[] biterRun;
+            readonly static SpritesheetImage[] biterRun;
             private const int BiterAnimationFrameCount = 16;
 
-            public static void Setup(Bitmap north, Bitmap east, Bitmap south, Bitmap west)
+            static BiterRunSpritesheet()
             {
-                biterRun = new SpritesheetImage[4];
-                biterRun[0] = new SpritesheetImage(north, 8, 8);
-                biterRun[1] = new SpritesheetImage(east, 8, 8);
-                biterRun[2] = new SpritesheetImage(south, 8, 8);
-                biterRun[3] = new SpritesheetImage(west, 8, 8);
+                biterRun = new SpritesheetImage[]
+                {
+                    new SpritesheetImage(Properties.Resources.biter_run_01, 8, 8),
+                    new SpritesheetImage(Properties.Resources.biter_run_02, 8, 8),
+                    new SpritesheetImage(Properties.Resources.biter_run_03, 8, 8),
+                    new SpritesheetImage(Properties.Resources.biter_run_04, 8, 8),
+                };
             }
 
             public static Bitmap GetBiter(int animationFrameIndex, int rotation)
