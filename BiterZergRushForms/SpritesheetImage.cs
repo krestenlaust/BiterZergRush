@@ -30,7 +30,6 @@ namespace BiterZergRushForms
                             GraphicsUnit.Pixel);
                     }
                     sprites[i++] = target;
-                    //sprites[i++] = spritesheet.Clone(spriteArea, spritesheet.PixelFormat);
                 }
             }
         }

@@ -13,7 +13,11 @@ namespace BiterZergRushForms
         /// </summary>
         public float Rotation { get; set; } = 0;
         public float Scale { get; set; } = 1;
+        /// <summary>
+        /// Can be null, to not display anything.
+        /// </summary>
         public abstract Image Sprite { get; }
+        public float Health;
 
         public virtual void OnUpdate(float deltaSeconds)
         {
