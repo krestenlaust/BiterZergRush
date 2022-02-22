@@ -169,7 +169,6 @@ namespace BiterZergRushForms.Entities
                 else
                 {
                     MoveTo(nearestPointToWindow);
-                    //MoveTo(targetWindow.Location);
                 }
             }
         }
