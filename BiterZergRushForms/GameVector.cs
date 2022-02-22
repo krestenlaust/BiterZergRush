@@ -4,7 +4,7 @@ using System.Drawing;
 namespace BiterZergRushForms
 {
     /// <summary>
-    /// Class based on PointF, converts implicitly to Point, allows for arithmetic.
+    /// Struct based on PointF, converts implicitly to Point, allows for arithmetic.
     /// </summary>
     public readonly struct GameVector
     {
@@ -23,6 +23,8 @@ namespace BiterZergRushForms
             Y = point.Y;
         }
 
+        public float Length => (float)Math.Sqrt(X * X + Y * Y);
+
         public static GameVector Lerp(GameVector a, GameVector b, float t)
         {
             return (a * (1f - t)) + (b * t);
@@ -31,7 +33,7 @@ namespace BiterZergRushForms
         public static float Distance(GameVector a, GameVector b)
         {
             GameVector vectorBetween = a - b;
-            return (float)Math.Sqrt(vectorBetween.X * vectorBetween.X + vectorBetween.Y * vectorBetween.Y);
+            return vectorBetween.Length;
         }
 
         public GameVector NearestPointOnRectangle(RectangleF rect)
