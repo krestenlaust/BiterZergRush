@@ -34,6 +34,22 @@ namespace BiterZergRushForms
             return (float)Math.Sqrt(vectorBetween.X * vectorBetween.X + vectorBetween.Y * vectorBetween.Y);
         }
 
+        public GameVector NearestPointOnRectangle(RectangleF rect)
+        {
+            float minX, maxX;
+            minX = rect.X;
+            maxX = rect.X + rect.Width;
+
+            float minY, maxY;
+            minY = rect.Y;
+            maxY = rect.Y + rect.Height;
+
+            float targetX = Math.Min(Math.Max(minX, X), maxX);
+            float targetY = Math.Min(Math.Max(minY, Y), maxY);
+
+            return new GameVector(targetX, targetY);
+        }
+
         public static implicit operator Point(GameVector p) => new Point((int)Math.Round(p.X), (int)Math.Round(p.Y));
 
         public static GameVector operator +(GameVector a, GameVector b)

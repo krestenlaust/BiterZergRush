@@ -6,13 +6,13 @@ namespace BiterZergRushForms.Entities
 {
     public class WindowEntity : GameEntity
     {
-        public override int Width => windowRect.Width;
-        public override int Height => windowRect.Height;
+        public override int Width => WindowRect.Width;
+        public override int Height => WindowRect.Height;
 
-        public override GameVector Location => new GameVector(windowRect.X + windowRect.Width * 0.5f, windowRect.Y + windowRect.Height * 0.5f);
+        public override GameVector Location => new GameVector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);
+        public Rectangle WindowRect { get; private set; }
 
         IntPtr windowHandle;
-        Rectangle windowRect;
 
         public WindowEntity(IntPtr windowHandle)
         {
@@ -26,7 +26,7 @@ namespace BiterZergRushForms.Entities
         public override void OnUpdate(float deltaSeconds)
         {
             NativeFunctions.GetWindowRect(windowHandle, out NativeFunctions.RECT lpRect);
-            windowRect = lpRect;
+            WindowRect = lpRect;
 
             if (Health <= 0)
             {

@@ -153,7 +153,8 @@ namespace BiterZergRushForms.Entities
             if (!(targetWindow is null))
             {
                 bool previousAttack = attacking;
-                attacking = GameVector.Distance(Location, targetWindow.Location) < 2;
+                GameVector nearestPointToWindow = Location.NearestPointOnRectangle(targetWindow.WindowRect);
+                attacking = GameVector.Distance(Location, nearestPointToWindow) < 2;
 
                 if (previousAttack != attacking)
                 {
@@ -167,7 +168,8 @@ namespace BiterZergRushForms.Entities
                 }
                 else
                 {
-                    MoveTo(targetWindow.Location);
+                    MoveTo(nearestPointToWindow);
+                    //MoveTo(targetWindow.Location);
                 }
             }
         }
