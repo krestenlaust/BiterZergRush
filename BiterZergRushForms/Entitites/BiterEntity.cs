@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace BiterZergRushForms.Entities
@@ -16,7 +17,7 @@ namespace BiterZergRushForms.Entities
         /// Movement speed,
         /// Unit: Pixels / Second
         /// </summary>
-        const float PixelsPerSecond = 220; //50;
+        const float PixelsPerSecond = 220f; //50;
 
         /// <summary>
         /// Interval of sprite swap.
@@ -150,26 +151,29 @@ namespace BiterZergRushForms.Entities
                 targetWindow = shortestWindow;
             }
 
-            if (!(targetWindow is null))
+            if (targetWindow is null)
             {
-                bool previousAttack = attacking;
-                GameVector nearestPointToWindow = Location.NearestPointOnRectangle(targetWindow.WindowRect);
-                attacking = GameVector.Distance(Location, nearestPointToWindow) < 2;
+                return;
+            }
 
-                if (previousAttack != attacking)
-                {
-                    timeSinceFrameSwap = AnimationIntervalSecond;
-                    animationIndex = 0;
-                }
 
-                if (attacking)
-                {
-                    targetWindow.Health -= deltaSeconds;
-                }
-                else
-                {
-                    MoveTo(nearestPointToWindow);
-                }
+            bool currentlyAttacking = attacking;
+            GameVector nearestPointToWindow = Location.NearestPointOnRectangle(targetWindow.WindowRect);
+            attacking = GameVector.Distance(Location, nearestPointToWindow) < 2;
+
+            if (currentlyAttacking != attacking)
+            {
+                timeSinceFrameSwap = AnimationIntervalSecond;
+                animationIndex = 0;
+            }
+
+            if (attacking)
+            {
+                targetWindow.Health -= deltaSeconds;
+            }
+            else
+            {
+                MoveTo(nearestPointToWindow);
             }
         }
 
