@@ -121,5 +121,17 @@
   <ItemGroup>
     <None Include="Resources\biter-attack-04.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\health-bar-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\health-bar-yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\health-bar-red-cell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\health-bar-yellow-cell.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

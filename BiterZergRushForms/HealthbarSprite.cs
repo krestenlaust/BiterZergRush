@@ -5,30 +5,53 @@ namespace BiterZergRushForms
 {
     public class HealthbarSprite
     {
-        readonly static Bitmap cellGrey, cellGreen;
+        const float redFraction     = 1/3f;
+        const float yellowFraction  = 2/3f;
+        const float greenFraction   = 3/3f;
+
+        readonly static Bitmap cellGrey, cellGreen, cellYellow, cellRed;
+        readonly static int cellSize;
 
         static HealthbarSprite()
         {
             cellGrey = Properties.Resources.health_bar_grey_cell;
+            cellRed = Properties.Resources.health_bar_red_cell;
+            cellYellow = Properties.Resources.health_bar_yellow_cell;
             cellGreen = Properties.Resources.health_bar_green_cell;
+
+            cellSize = cellGrey.Width;
         }
 
-        public static Bitmap GenerateHealthbar(int green, int total)
+        public static Bitmap GenerateHealthbar(int health, int total)
         {
-            if (green > total)
+            if (health > total)
             {
-                throw new ArgumentOutOfRangeException($"{nameof(green)} has to be lower than or equal to {nameof(total)}");
+                throw new ArgumentOutOfRangeException($"{nameof(health)} has to be lower than or equal to {nameof(total)}");
             }
 
-            int cellLength = cellGrey.Width;
-            Bitmap healthbar = new Bitmap(cellLength * total, cellLength);
+            Bitmap healthbar = new Bitmap(cellSize * total, cellSize);
+
+            Bitmap coloredCell;
+            float healthFraction = health / (float)total;
+            if (healthFraction >= yellowFraction)
+            {
+                coloredCell = cellGreen;
+            }
+            else if (healthFraction >= redFraction)
+            {
+                coloredCell = cellYellow;
+            }
+            else
+            {
+                coloredCell = cellRed;
+            }
 
             using (Graphics g = Graphics.FromImage(healthbar))
             {
                 for (int i = 0; i < total; i++)
                 {
-                    Rectangle targetRect = new Rectangle(i * cellLength, 0, cellLength, cellLength);
-                    Bitmap sourceImage = i < green ? cellGreen : cellGrey;
+                    Rectangle targetRect = new Rectangle(i * cellSize, 0, cellSize, cellSize);
+                    Bitmap sourceImage = i < health ? coloredCell : cellGrey;
 
                     g.DrawImage(
                         sourceImage,
