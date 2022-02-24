@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using EngineProject;
 
 namespace BiterZergRushForms.Entities
 {
@@ -158,7 +159,7 @@ namespace BiterZergRushForms.Entities
 
 
             bool currentlyAttacking = attacking;
-            GameVector nearestPointToWindow = Location.NearestPointOnRectangle(targetWindow.WindowRect);
+            GameVector nearestPointToWindow = GameVector.NearestPointOnRectangle(Location, targetWindow.WindowRect);
             attacking = GameVector.Distance(Location, nearestPointToWindow) < 2;
 
             if (currentlyAttacking != attacking)

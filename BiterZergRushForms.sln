@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiterZergRushForms", "BiterZergRushForms\BiterZergRushForms.csproj", "{9FD259E1-48AF-4A37-AFCF-979EBBC3AA3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineProject", "E\EngineProject.csproj", "{ACD0C817-A472-4CFC-8FFE-8A387C54A432}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9FD259E1-48AF-4A37-AFCF-979EBBC3AA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FD259E1-48AF-4A37-AFCF-979EBBC3AA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FD259E1-48AF-4A37-AFCF-979EBBC3AA3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD0C817-A472-4CFC-8FFE-8A387C54A432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD0C817-A472-4CFC-8FFE-8A387C54A432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD0C817-A472-4CFC-8FFE-8A387C54A432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD0C817-A472-4CFC-8FFE-8A387C54A432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

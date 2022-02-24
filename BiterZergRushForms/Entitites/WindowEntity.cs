@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
+using EngineProject;
 
 namespace BiterZergRushForms.Entities
 {

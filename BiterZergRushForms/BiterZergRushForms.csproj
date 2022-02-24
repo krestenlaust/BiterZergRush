@@ -58,7 +58,6 @@
     </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="GameEntity.cs" />
-    <Compile Include="GameVector.cs" />
     <Compile Include="HealthbarSprite.cs" />
     <Compile Include="NativeFunctions.cs" />
     <Compile Include="Program.cs" />
@@ -122,16 +121,16 @@
     <None Include="Resources\biter-attack-04.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\health-bar-red.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\health-bar-yellow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\health-bar-red-cell.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\health-bar-yellow-cell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\E\EngineProject.csproj">
+      <Project>{acd0c817-a472-4cfc-8ffe-8a387c54a432}</Project>
+      <Name>EngineProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

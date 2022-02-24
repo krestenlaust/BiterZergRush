@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BiterZergRushForms.Entities;
+using EngineProject;
 
 namespace BiterZergRushForms
 {
@@ -14,6 +15,7 @@ namespace BiterZergRushForms
         bool rotating = false;
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
+        GameVector v;
 
         public override void OnKeyDown(KeyEventArgs keyEvent)
         {
@@ -59,6 +61,7 @@ namespace BiterZergRushForms
         {
             controlledBiter = new BiterEntity() { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
+            return;
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(10, 5) });
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(15, 15) });
         }

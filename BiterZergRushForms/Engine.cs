@@ -69,7 +69,7 @@ namespace BiterZergRushForms
             float deltaSeconds = (float)(currentTime - previousTime).TotalSeconds;
             previousTime = currentTime;
 
-            Console.WriteLine(deltaSeconds);
+            // Console.WriteLine(deltaSeconds);
 
             gameInstance.OnUpdate(deltaSeconds);
 
