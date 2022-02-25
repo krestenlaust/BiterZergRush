@@ -6,10 +6,7 @@ namespace BiterZergRushForms.Entities
 {
     public class WindowEntity : FactorioEntity
     {
-        //public override int Width => WindowRect.Width;
-        //public override int Height => WindowRect.Height;
-
-        public override GameVector Location => new GameVector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);
+        public override Vector Location => new Vector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);
         public Rectangle WindowRect { get; private set; }
 
         readonly IntPtr windowHandle;

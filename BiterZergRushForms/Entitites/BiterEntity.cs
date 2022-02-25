@@ -25,10 +25,10 @@ namespace BiterZergRushForms.Entities
 
         int animationIndex = 0;
         float timeSinceFrameSwap = 0;
-        GameVector movementStart;
-        GameVector movementEnd;
+        Vector movementStart;
+        Vector movementEnd;
         WindowEntity targetWindow = null;
-        GameVector internalLocation;
+        Vector internalLocation;
 
         float timeSinceTargetSet = 0;
         float totalTravelTime = 0;
@@ -44,7 +44,7 @@ namespace BiterZergRushForms.Entities
 
         public float Rotation { get; set; } = 0;
 
-        public override GameVector Location {
+        public override Vector Location {
             get => internalLocation;
             set
             {
@@ -77,9 +77,9 @@ namespace BiterZergRushForms.Entities
             return ((int)Math.Round(radians / (Math.PI * 2) * 16)) % 16;
         }
 
-        public void MoveTo(GameVector position)
+        public void MoveTo(Vector position)
         {
-            float travelDistance = GameVector.Distance(internalLocation, position);
+            float travelDistance = Vector.Distance(internalLocation, position);
             totalTravelTime = travelDistance / PixelsPerSecond;
 
             timeSinceFrameSwap = 0;
@@ -88,7 +88,7 @@ namespace BiterZergRushForms.Entities
             movementStart = internalLocation;
             movementEnd = position;
 
-            GameVector differenceVector = movementEnd - movementStart;
+            Vector differenceVector = movementEnd - movementStart;
             Rotation = (float)(Math.Atan2(differenceVector.Y, differenceVector.X) + (Math.PI * 2.5f));
         }
 
@@ -102,7 +102,7 @@ namespace BiterZergRushForms.Entities
             lerpValue = Math.Min(1, lerpValue);
 
             // interpolate biter position.
-            internalLocation = GameVector.Lerp(movementStart, movementEnd, lerpValue);
+            internalLocation = Vector.Lerp(movementStart, movementEnd, lerpValue);
 
             // reached target
             if (timeSinceTargetSet >= totalTravelTime)
@@ -129,12 +129,7 @@ namespace BiterZergRushForms.Entities
                 float? shortestDistance = null;
                 foreach (var item in Engine.GetEntititesByType<WindowEntity>())
                 {
-                    float distance = GameVector.Distance(Location, item.Location);
-                    if (distance < 0.1f)
-                    {
-                        continue;
-                    }
-
+                    float distance = Vector.Distance(Location, item.Location);
                     if (shortestDistance is null || distance < shortestDistance.Value)
                     {
                         shortestDistance = distance;
@@ -152,8 +147,8 @@ namespace BiterZergRushForms.Entities
 
 
             bool currentlyAttacking = attacking;
-            GameVector nearestPointToWindow = GameVector.NearestPointOnRectangle(Location, targetWindow.WindowRect);
-            attacking = GameVector.Distance(Location, nearestPointToWindow) < 2;
+            Vector nearestPointToWindow = Vector.NearestPointOnRectangle(Location, targetWindow.WindowRect);
+            attacking = Vector.Distance(Location, nearestPointToWindow) < 2;
 
             if (currentlyAttacking != attacking)
             {

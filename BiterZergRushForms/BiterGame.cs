@@ -10,7 +10,7 @@ namespace BiterZergRushForms
     {
         const int manualMoveMultiplier = 50;
         readonly Dictionary<IntPtr, WindowEntity> windows = new Dictionary<IntPtr, WindowEntity>();
-        readonly GameVector spawnPoint = new GameVector(10, 10);
+        readonly Vector spawnPoint = new Vector(10, 10);
         bool rotating = false;
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
@@ -35,19 +35,19 @@ namespace BiterZergRushForms
             }
             else if (keyEvent.KeyCode == Keys.Up)
             {
-                controlledBiter.Location -= new GameVector(0, 1 * manualMoveMultiplier);
+                controlledBiter.Location -= new Vector(0, 1 * manualMoveMultiplier);
             }
             else if (keyEvent.KeyCode == Keys.Down)
             {
-                controlledBiter.Location += new GameVector(0, 1 * manualMoveMultiplier);
+                controlledBiter.Location += new Vector(0, 1 * manualMoveMultiplier);
             }
             else if (keyEvent.KeyCode == Keys.Left)
             {
-                controlledBiter.Location -= new GameVector(1 * manualMoveMultiplier, 0);
+                controlledBiter.Location -= new Vector(1 * manualMoveMultiplier, 0);
             }
             else if (keyEvent.KeyCode == Keys.Right)
             {
-                controlledBiter.Location += new GameVector(1 * manualMoveMultiplier, 0);
+                controlledBiter.Location += new Vector(1 * manualMoveMultiplier, 0);
             }
             else
             {
@@ -60,8 +60,8 @@ namespace BiterZergRushForms
             controlledBiter = new BiterEntity() { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
             return;
-            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(10, 5) });
-            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new GameVector(15, 15) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
         }
 
         public override void OnUpdate(float deltaSeconds)
@@ -71,6 +71,7 @@ namespace BiterZergRushForms
             if (timeSinceLastRefreshedActiveWindow >= 3)
             {
                 IntPtr windowHandle = NativeFunctions.GetForegroundWindow();
+
                 if (!windows.ContainsKey(windowHandle))
                 {
                     WindowEntity windowEntity = new WindowEntity(windowHandle);

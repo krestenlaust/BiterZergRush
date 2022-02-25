@@ -8,7 +8,7 @@ namespace OverlayEngine
         /// <summary>
         /// The location in pixels of the entity. Based in the center of the rendered graphics.
         /// </summary>
-        public virtual GameVector Location { get; set; }
+        public virtual Vector Location { get; set; }
         
         /// <summary>
         /// The scale of the rendered image.

@@ -73,15 +73,16 @@ namespace OverlayEngine
                     int scaledHeight = (int)(renderSprite.Height * item.Scale);
                     Size scaledSize = new Size(scaledWidth, scaledHeight);
 
-                    float locX = item.Location.X - (scaledWidth * 0.5f);
-                    float locY = item.Location.Y - (scaledHeight * 0.5f);
-                    Point location = new Point((int)locX, (int)locY);
+                    Vector location = item.Location - new Vector(scaledWidth, scaledHeight) * 0.5f;
 
-                    graphics.DrawImage(renderSprite, locX, locY, scaledWidth, scaledHeight);
+                    graphics.DrawImage(renderSprite, new RectangleF(location, scaledSize));
 
-                    Point borderLocation = new Point((int)locX - 1, (int)locY - 1);
-                    Pen borderPen = new Pen(Brushes.Red, 1);
-                    borderPen.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+                    Vector borderLocation = location - new Vector(1, 1);
+                    Pen borderPen = new Pen(Brushes.Red, 1)
+                    {
+                        Alignment = System.Drawing.Drawing2D.PenAlignment.Center
+                    };
+
                     graphics.DrawRectangle(borderPen, new Rectangle(borderLocation, scaledSize + new Size(1, 1)));
                 }
             }
