@@ -48,25 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiterGame.cs" />
-    <Compile Include="Engine.cs" />
     <Compile Include="Entitites\BiterEntity.cs" />
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Game.cs" />
-    <Compile Include="GameEntity.cs" />
+    <Compile Include="FactorioEntity.cs" />
     <Compile Include="HealthbarSprite.cs" />
-    <Compile Include="NativeFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpritesheetImage.cs" />
     <Compile Include="Entitites\WindowEntity.cs" />
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -127,9 +115,9 @@
     <None Include="Resources\health-bar-yellow-cell.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\E\EngineProject.csproj">
-      <Project>{acd0c817-a472-4cfc-8ffe-8a387c54a432}</Project>
-      <Name>EngineProject</Name>
+    <ProjectReference Include="..\OverlayEngine\OverlayEngine.csproj">
+      <Project>{e0447e14-e942-4377-8d3c-f5d0e3e4d8ca}</Project>
+      <Name>OverlayEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

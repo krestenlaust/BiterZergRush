@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Drawing;
-using EngineProject;
+using OverlayEngine;
 
 namespace BiterZergRushForms.Entities
 {
-    public class WindowEntity : GameEntity
+    public class WindowEntity : FactorioEntity
     {
-        public override int Width => WindowRect.Width;
-        public override int Height => WindowRect.Height;
+        //public override int Width => WindowRect.Width;
+        //public override int Height => WindowRect.Height;
 
         public override GameVector Location => new GameVector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);
         public Rectangle WindowRect { get; private set; }
 
-        IntPtr windowHandle;
+        readonly IntPtr windowHandle;
 
         public WindowEntity(IntPtr windowHandle)
         {
             this.windowHandle = windowHandle;
             MaxHealth = 15;
             Health = 15;
+            GameSprite = null;
         }
-
-        public override Image Sprite => null;
 
         public override void OnUpdate(float deltaSeconds)
         {

@@ -22,6 +22,9 @@ namespace BiterZergRushForms
             cellSize = cellGrey.Width;
         }
 
+        public static SizeF CalculateHealthbarDimensions(int total)
+            => new SizeF(cellSize * total, cellSize);
+
         public static Bitmap GenerateHealthbar(int health, int total)
         {
             if (health > total)

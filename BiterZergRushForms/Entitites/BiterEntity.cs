@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using EngineProject;
+using OverlayEngine;
 
 namespace BiterZergRushForms.Entities
 {
-    public class BiterEntity : GameEntity
+    public class BiterEntity : FactorioEntity
     {
         /// <summary>
         /// Amount of pixels to move before animation frame swap.
@@ -31,6 +28,7 @@ namespace BiterZergRushForms.Entities
         GameVector movementStart;
         GameVector movementEnd;
         WindowEntity targetWindow = null;
+        GameVector internalLocation;
 
         float timeSinceTargetSet = 0;
         float totalTravelTime = 0;
@@ -39,12 +37,12 @@ namespace BiterZergRushForms.Entities
 
         public BiterEntity()
         {
-            Scale = 0.5f;
+            Scale = 0.4f;
             MaxHealth = 10;
             Health = 10;
         }
 
-        GameVector internalLocation;
+        public float Rotation { get; set; } = 0;
 
         public override GameVector Location {
             get => internalLocation;
@@ -55,7 +53,7 @@ namespace BiterZergRushForms.Entities
             }
         }
 
-        public override Image Sprite {
+        public override Image GameSprite {
             get
             {
                 if (attacking)
@@ -77,11 +75,6 @@ namespace BiterZergRushForms.Entities
         private static int ConvertRadiansTo16thCardinal(float radians)
         {
             return ((int)Math.Round(radians / (Math.PI * 2) * 16)) % 16;
-        }
-
-        public void Attack(GameEntity entity)
-        {
-            
         }
 
         public void MoveTo(GameVector position)

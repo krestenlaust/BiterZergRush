@@ -30,23 +30,8 @@ namespace BiterZergRushForms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBoxGameDraw = new System.Windows.Forms.PictureBox();
             this.timerGameLoop = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameDraw)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBoxGameDraw
-            // 
-            this.pictureBoxGameDraw.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.pictureBoxGameDraw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBoxGameDraw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxGameDraw.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxGameDraw.Name = "pictureBoxGameDraw";
-            this.pictureBoxGameDraw.Size = new System.Drawing.Size(800, 450);
-            this.pictureBoxGameDraw.TabIndex = 0;
-            this.pictureBoxGameDraw.TabStop = false;
-            this.pictureBoxGameDraw.Click += new System.EventHandler(this.pictureBoxBiter1_Click);
-            this.pictureBoxGameDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBoxGameDraw_Paint);
             // 
             // timerGameLoop
             // 
@@ -59,7 +44,6 @@ namespace BiterZergRushForms
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBoxGameDraw);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.KeyPreview = true;
@@ -72,14 +56,11 @@ namespace BiterZergRushForms
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxGameDraw)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBoxGameDraw;
         private System.Windows.Forms.Timer timerGameLoop;
     }
 }

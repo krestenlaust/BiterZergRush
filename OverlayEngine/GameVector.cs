@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace EngineProject
+namespace OverlayEngine
 {
     public readonly struct GameVector : IEquatable<GameVector>
     {

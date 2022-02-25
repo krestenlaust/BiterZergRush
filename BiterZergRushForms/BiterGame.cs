@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using BiterZergRushForms.Entities;
-using EngineProject;
+using OverlayEngine;
 
 namespace BiterZergRushForms
 {
@@ -15,6 +14,9 @@ namespace BiterZergRushForms
         bool rotating = false;
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
+        /// <summary>
+        /// V for sejr?
+        /// </summary>
         GameVector v;
 
         public override void OnKeyDown(KeyEventArgs keyEvent)

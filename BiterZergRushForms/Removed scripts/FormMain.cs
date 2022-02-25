@@ -14,6 +14,12 @@ namespace BiterZergRushForms
             InitializeComponent();
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Engine.Render(e.Graphics);
+        }
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             Bounds = Screen.PrimaryScreen.Bounds;
@@ -37,7 +43,7 @@ namespace BiterZergRushForms
 
         private void pictureBoxGameDraw_Paint(object sender, PaintEventArgs e)
         {
-            Engine.Render(e.Graphics);
+            //Engine.Render(e.Graphics);
         }
 
         private void timerGameLoop_Tick(object sender, EventArgs e)
@@ -46,7 +52,8 @@ namespace BiterZergRushForms
             Engine.UpdateGame();
 
             // rendering
-            pictureBoxGameDraw.Invalidate();
+            this.Invalidate();
+            //pictureBoxGameDraw.Invalidate();
         }
     }
 }
