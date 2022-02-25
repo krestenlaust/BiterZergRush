@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BiterZergRushForms
 {
-    public class Spritesheet
+    public class Spritesheet : IEnumerable<Bitmap>
     {
         private readonly Bitmap[] sprites;
 
@@ -59,12 +60,17 @@ namespace BiterZergRushForms
             }
         }
 
-        public IEnumerable<Bitmap> T()
+        public IEnumerator<Bitmap> GetEnumerator()
         {
             foreach (Bitmap sprite in sprites)
             {
                 yield return sprite;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }
