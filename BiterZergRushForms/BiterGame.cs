@@ -14,10 +14,6 @@ namespace BiterZergRushForms
         bool rotating = false;
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
-        /// <summary>
-        /// V for sejr?
-        /// </summary>
-        GameVector v;
 
         public override void OnKeyDown(KeyEventArgs keyEvent)
         {

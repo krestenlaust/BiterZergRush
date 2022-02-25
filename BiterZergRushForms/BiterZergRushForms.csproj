@@ -53,6 +53,7 @@
     <Compile Include="HealthbarSprite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Spritesheet.cs" />
     <Compile Include="SpritesheetImage.cs" />
     <Compile Include="Entitites\WindowEntity.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -173,17 +173,17 @@ namespace BiterZergRushForms.Entities
 
         public static class BiterAttackSpritesheet
         {
-            readonly static SpritesheetImage[] biterAttack;
+            readonly static Spritesheet[] biterAttack;
             private const int BiterAnimationFrameCount = 11;
 
             static BiterAttackSpritesheet()
             {
-                biterAttack = new SpritesheetImage[]
+                biterAttack = new Spritesheet[]
                 {
-                    new SpritesheetImage(Properties.Resources.biter_attack_01, 11, 4),
-                    new SpritesheetImage(Properties.Resources.biter_attack_02, 11, 4),
-                    new SpritesheetImage(Properties.Resources.biter_attack_03, 11, 4),
-                    new SpritesheetImage(Properties.Resources.biter_attack_04, 11, 4)
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_attack_01, 11, 4),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_attack_02, 11, 4),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_attack_03, 11, 4),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_attack_04, 11, 4)
                 };
             }
 
@@ -199,17 +199,17 @@ namespace BiterZergRushForms.Entities
 
         public static class BiterRunSpritesheet
         {
-            readonly static SpritesheetImage[] biterRun;
+            readonly static Spritesheet[] biterRun;
             private const int BiterAnimationFrameCount = 16;
 
             static BiterRunSpritesheet()
             {
-                biterRun = new SpritesheetImage[]
+                biterRun = new Spritesheet[]
                 {
-                    new SpritesheetImage(Properties.Resources.biter_run_01, 8, 8),
-                    new SpritesheetImage(Properties.Resources.biter_run_02, 8, 8),
-                    new SpritesheetImage(Properties.Resources.biter_run_03, 8, 8),
-                    new SpritesheetImage(Properties.Resources.biter_run_04, 8, 8),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_run_01, 8, 8),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_run_02, 8, 8),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_run_03, 8, 8),
+                    Spritesheet.MakeSpritesheetFromSpriteCount(Properties.Resources.biter_run_04, 8, 8),
                 };
             }
 

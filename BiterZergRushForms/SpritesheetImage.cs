@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace BiterZergRushForms
 {
@@ -8,6 +9,7 @@ namespace BiterZergRushForms
 
         public SpritesheetImage(Bitmap spritesheet, int width, int height)
         {
+
             sprites = new Bitmap[width * height];
             int spriteWidth = spritesheet.Width / width;
             int spriteHeight = spritesheet.Height / height;
