@@ -34,6 +34,13 @@ namespace BiterZergRushForms
             }
         }
 
+        /// <summary>
+        /// Make a <see cref="Spritesheet"/> from a <see cref="Bitmap"/>, and the dimensions of the sprites
+        /// </summary>
+        /// <param name="spritesheetImage">The spritesheet image</param>
+        /// <param name="spriteWidth">The width of the sprites on the spritesheet</param>
+        /// <param name="spriteHeight">The height of the sprites on the spritesheet</param>
+        /// <returns>A <see cref="Spritesheet"/> which contains all the individual sprites of the <see cref="Bitmap"/></returns>
         public static Spritesheet MakeSpritesheetFromSpriteDimensions(Bitmap spritesheetImage, int spriteWidth, int spriteHeight)
         {
             int columnCount = spriteWidth / spritesheetImage.Width;
@@ -42,6 +49,13 @@ namespace BiterZergRushForms
             return new Spritesheet(spritesheetImage, spriteWidth, spriteHeight, rowCount * columnCount);
         }
 
+        /// <summary>
+        /// Make a <see cref="Spritesheet"/> from a <see cref="Bitmap"/>, and the dimensions of the sprites
+        /// </summary>
+        /// <param name="spritesheetImage">The spritesheet image</param>
+        /// <param name="columnCount">How many columns of sprites are in the spritesheet (how many are in 1 row)</param>
+        /// <param name="rowCount">How many rows of sprites are in the spritesheet (how many are in 1 column)</param>
+        /// <returns>A <see cref="Spritesheet"/> which contains all the individual sprites of the <see cref="Bitmap"/></returns>
         public static Spritesheet MakeSpritesheetFromSpriteCount(Bitmap spritesheetImage, int columnCount, int rowCount)
         {
             int spriteWidth = spritesheetImage.Width / columnCount;
@@ -60,6 +74,10 @@ namespace BiterZergRushForms
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the sprites
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object which iterates through the sprites in the spritesheet</returns>
         public IEnumerator<Bitmap> GetEnumerator()
         {
             foreach (Bitmap sprite in sprites)
@@ -68,6 +86,10 @@ namespace BiterZergRushForms
             }
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the sprites
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> object which iterates through the sprites in the spritesheet</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
