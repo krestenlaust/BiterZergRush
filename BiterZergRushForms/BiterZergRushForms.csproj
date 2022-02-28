@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aud.IO">
+      <HintPath>..\..\Fourier Transformation\Aud.IO\bin\Debug\netstandard2.0\Aud.IO.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -120,6 +123,9 @@
       <Project>{e0447e14-e942-4377-8d3c-f5d0e3e4d8ca}</Project>
       <Name>OverlayEngine</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alert-destroyed.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

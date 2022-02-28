@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Aud.IO;
 using BiterZergRushForms.Entities;
 using OverlayEngine;
+
 
 namespace BiterZergRushForms
 {
@@ -59,6 +61,9 @@ namespace BiterZergRushForms
         {
             controlledBiter = new BiterEntity() { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
+            //AudioFile file = Audio.LoadWaveFile(@"C:\Users\kress\Music\Dannys beskedlyd.wav");
+            //Audio.PlayAudio(file);
+
             return;
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });

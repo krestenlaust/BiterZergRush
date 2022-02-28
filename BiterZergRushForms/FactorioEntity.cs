@@ -13,24 +13,41 @@ namespace BiterZergRushForms
     /// </summary>
     public abstract class FactorioEntity : OverlayEntity
     {
-        const float healthbarScale = 2;
+        const float HealthbarScale = 2;
 
-        public float Health;
-        public int MaxHealth;
+        float health;
+        int maxHealth;
+        SizeF healthbarDimensions;
 
-        private bool ShowingHealthbar => Health != MaxHealth && MaxHealth != 0;
+        public float Health
+        {
+            get => health;
+            set => health = value;
+        }
+
+        public int MaxHealth
+        {
+            get => maxHealth;
+            set
+            {
+                maxHealth = value;
+                healthbarDimensions = HealthbarSprite.CalculateHealthbarDimensions(value);
+            }
+        }
 
         public virtual Image GameSprite { get; protected set; }
 
         /// <summary>
         /// Returns the width of <c>GameSprite</c> or width of the healthbar, whatevers the greatest.
         /// </summary>
-        public sealed override int Width => Math.Max(GameSprite?.Width ?? 0, (int)(HealthbarSprite.CalculateHealthbarDimensions(MaxHealth).Width * healthbarScale));
+        public sealed override int Width => Math.Max(GameSprite?.Width ?? 0, (int)(healthbarDimensions.Width * HealthbarScale));
 
         /// <summary>
         /// Returns the height of <c>GameSprite</c> summed the height of the healthbar.
         /// </summary>
-        public sealed override int Height => GameSprite?.Height ?? 0 + (int)(HealthbarSprite.CalculateHealthbarDimensions(MaxHealth).Height * healthbarScale);
+        public sealed override int Height => GameSprite?.Height ?? 0 + (int)(healthbarDimensions.Height * HealthbarScale);
+
+        bool ShowingHealthbar => Health != MaxHealth && MaxHealth != 0;
 
         public sealed override void OnRender(Graphics graphics)
         {
@@ -50,8 +67,8 @@ namespace BiterZergRushForms
             // maybe demote scale property to SpriteEntity?
             using (Bitmap healthbarSprite = HealthbarSprite.GenerateHealthbar(Math.Max((int)Math.Round(Health), 0), MaxHealth))
             {
-                float scaledWidth = healthbarSprite.Width * healthbarScale;
-                float scaledHeight = healthbarSprite.Height * healthbarScale;
+                float scaledWidth = healthbarSprite.Width * HealthbarScale;
+                float scaledHeight = healthbarSprite.Height * HealthbarScale;
 
                 int healthbarLocX = 0;
                 int healthbarLocY = (int)(Height - scaledHeight);
