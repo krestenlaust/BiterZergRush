@@ -10,6 +10,7 @@ namespace BiterZergRushForms.Entities
     {
         public override Vector Location => new Vector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);
         public Rectangle WindowRect { get; private set; }
+        public bool IsMinimized { get; private set; }
 
         readonly IntPtr windowHandle;
         float lastHealth;
@@ -18,8 +19,8 @@ namespace BiterZergRushForms.Entities
         public WindowEntity(IntPtr windowHandle)
         {
             this.windowHandle = windowHandle;
-            MaxHealth = 15;
-            Health = 15;
+            MaxHealth = 5;
+            Health = 5;
             lastHealth = Health;
             GameSprite = null;
         }
@@ -37,6 +38,7 @@ namespace BiterZergRushForms.Entities
 
             NativeFunctions.GetWindowRect(windowHandle, out NativeFunctions.RECT lpRect);
             WindowRect = lpRect;
+            IsMinimized = NativeFunctions.IsIconic(windowHandle);
 
             if (lastHealth > Health && timeSinceDamaged > 1.5f)
             {
@@ -53,6 +55,7 @@ namespace BiterZergRushForms.Entities
 
         public override void OnDestroy()
         {
+            NativeFunctions.ShowWindow(windowHandle, 11);
             //Process.GetProcessById((int)windowHandle).Kill();
         }
     }

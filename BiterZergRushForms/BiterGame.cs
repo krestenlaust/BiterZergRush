@@ -73,11 +73,11 @@ namespace BiterZergRushForms
         {
             timeSinceLastRefreshedActiveWindow += deltaSeconds;
 
-            if (timeSinceLastRefreshedActiveWindow >= 3)
+            if (timeSinceLastRefreshedActiveWindow >= 1)
             {
                 IntPtr windowHandle = NativeFunctions.GetForegroundWindow();
 
-                if (!windows.ContainsKey(windowHandle))
+                if (!windows.ContainsKey(windowHandle) && windowHandle != Engine.WindowHandle)
                 {
                     WindowEntity windowEntity = new WindowEntity(windowHandle);
                     Engine.Instantiate(windowEntity);

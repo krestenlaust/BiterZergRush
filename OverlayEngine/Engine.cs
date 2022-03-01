@@ -8,11 +8,12 @@ namespace OverlayEngine
     public static class Engine
     {
         public const int FrameInterval = 1000 / 60;
-        private static Game gameInstance;
-        static DateTime previousTime;
+        public static IntPtr WindowHandle { get; internal set; }
         static readonly List<OverlayEntity> entitites = new List<OverlayEntity>();
         static readonly List<OverlayEntity> destroyedEntitites = new List<OverlayEntity>();
-
+        static Game gameInstance;
+        static DateTime previousTime;
+        
         public static void StartGameLoop(Game game)
         {
             gameInstance = game;

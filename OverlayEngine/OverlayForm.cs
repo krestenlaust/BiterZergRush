@@ -13,6 +13,7 @@ namespace OverlayEngine
 
         public OverlayForm()
         {
+            Engine.WindowHandle = Handle;
             timerGameLoop = new Timer();
             timerGameLoop.Tick += TimerGameLoop_Tick;
             timerGameLoop.Interval = Engine.FrameInterval;

@@ -129,6 +129,11 @@ namespace BiterZergRushForms.Entities
                 float? shortestDistance = null;
                 foreach (var item in Engine.GetEntititesByType<WindowEntity>())
                 {
+                    if (item.IsMinimized)
+                    {
+                        continue;
+                    }
+
                     float distance = Vector.Distance(Location, item.Location);
                     if (shortestDistance is null || distance < shortestDistance.Value)
                     {
