@@ -6,6 +6,10 @@ using OverlayEngine;
 
 namespace BiterZergRushForms.Entities
 {
+    /// <summary>
+    /// This entity represents a Windows window and tracks its position accordingly.
+    /// It is used to provide the window with healthbar GUI and an in-game representation of position.
+    /// </summary>
     public class WindowEntity : FactorioEntity
     {
         public override Vector Location => new Vector(WindowRect.X + WindowRect.Width * 0.5f, WindowRect.Y + WindowRect.Height * 0.5f);

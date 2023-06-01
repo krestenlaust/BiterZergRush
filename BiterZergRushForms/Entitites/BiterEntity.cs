@@ -4,6 +4,9 @@ using OverlayEngine;
 
 namespace BiterZergRushForms.Entities
 {
+    /// <summary>
+    /// The biter entity attacks the <see cref="WindowEntity" />.
+    /// </summary>
     public class BiterEntity : FactorioEntity
     {
         /// <summary>
@@ -42,6 +45,9 @@ namespace BiterZergRushForms.Entities
             Health = 10;
         }
 
+        /// <summary>
+        /// Orientation expressed in radians.
+        /// </summary>
         public float Rotation { get; set; } = 0;
 
         public override Vector Location {
@@ -72,7 +78,7 @@ namespace BiterZergRushForms.Entities
         /// </summary>
         /// <param name="radians"></param>
         /// <returns></returns>
-        private static int ConvertRadiansTo16thCardinal(float radians)
+        static int ConvertRadiansTo16thCardinal(float radians)
         {
             return ((int)Math.Round(radians / (Math.PI * 2) * 16)) % 16;
         }
@@ -112,15 +118,15 @@ namespace BiterZergRushForms.Entities
                 movementStart = internalLocation;
             }
 
-            // if time passed for whole frame, then swap frame.
+            // swap to next animation frame
             if (timeSinceFrameSwap >= AnimationIntervalSecond)
             {
                 timeSinceFrameSwap = 0;
 
-                // swap to next animation frame
                 animationIndex = (animationIndex + 1) % (attacking ? 11 : 16);
             }
 
+            // choose new target
             if (timeSinceWindowSelected >= 3)
             {
                 timeSinceWindowSelected = 0;
@@ -149,7 +155,6 @@ namespace BiterZergRushForms.Entities
             {
                 return;
             }
-
 
             bool currentlyAttacking = attacking;
             Vector nearestPointToWindow = Vector.NearestPointOnRectangle(Location, targetWindow.WindowRect);
