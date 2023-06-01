@@ -141,24 +141,7 @@ namespace BiterZergRushForms.Entities
             {
                 timeSinceWindowSelected = 0;
 
-                WindowEntity shortestWindow = null;
-                float? shortestDistance = null;
-                foreach (var item in Engine.GetEntititesByType<WindowEntity>())
-                {
-                    if (item.IsMinimized)
-                    {
-                        continue;
-                    }
-
-                    float distance = Vector.Distance(Location, item.Location);
-                    if (shortestDistance is null || distance < shortestDistance.Value)
-                    {
-                        shortestDistance = distance;
-                        shortestWindow = item;
-                    }
-                }
-
-                targetWindow = shortestWindow;
+                targetWindow = GetNearbyWindowEntity();
             }
 
             if (targetWindow is null)
@@ -184,6 +167,34 @@ namespace BiterZergRushForms.Entities
             {
                 MoveTo(nearestPointToWindow);
             }
+        }
+
+        WindowEntity GetNearbyWindowEntity()
+        {
+            WindowEntity shortestWindow = null;
+
+            float? shortestDistance = null;
+            foreach (var item in Engine.GetEntititesByType<WindowEntity>())
+            {
+                if (item.WindowHandle == Engine.WindowHandle)
+                {
+                    continue;
+                }
+
+                if (item.IsMinimized)
+                {
+                    continue;
+                }
+
+                float distance = Vector.Distance(Location, item.Location);
+                if (shortestDistance is null || distance < shortestDistance.Value)
+                {
+                    shortestDistance = distance;
+                    shortestWindow = item;
+                }
+            }
+
+            return shortestWindow;
         }
 
         public static class BiterAttackSpritesheet

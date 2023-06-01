@@ -18,6 +18,11 @@ namespace BiterZergRushForms
 
         public void OnKeyDown(KeyEventArgs keyEvent)
         {
+            if (controlledBiter is null)
+            {
+                return;
+            }
+
             if (keyEvent.KeyCode == Keys.Enter)
             {
                 rotating = true;
@@ -26,6 +31,11 @@ namespace BiterZergRushForms
 
         public void OnKeyUp(KeyEventArgs keyEvent)
         {
+            if (controlledBiter is null)
+            {
+                return;
+            }
+
             if (keyEvent.KeyCode == Keys.Space)
             {
                 controlledBiter.Location = spawnPoint;
@@ -54,11 +64,11 @@ namespace BiterZergRushForms
 
         public void OnLoad()
         {
-            controlledBiter = new BiterEntity(false) { Location = spawnPoint };
-            Engine.Instantiate(controlledBiter);
+            //controlledBiter = new BiterEntity(false) { Location = spawnPoint };
+            //Engine.Instantiate(controlledBiter);
             
-            //Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
-            //Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
         }
 
         public void OnUpdate(float deltaSeconds)
