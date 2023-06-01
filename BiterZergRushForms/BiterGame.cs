@@ -68,7 +68,7 @@ namespace BiterZergRushForms
             //Engine.Instantiate(controlledBiter);
             
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
-            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
+            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(1500, 15) });
         }
 
         public void OnUpdate(float deltaSeconds)
