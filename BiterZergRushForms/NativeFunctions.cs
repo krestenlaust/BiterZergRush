@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace OverlayEngine
+namespace BiterZergRushForms
 {
     public static class NativeFunctions
     {

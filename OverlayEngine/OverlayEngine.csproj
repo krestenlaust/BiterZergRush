@@ -71,7 +71,6 @@
     <Compile Include="IGame.cs" />
     <Compile Include="OverlayEntity.cs" />
     <Compile Include="Vector.cs" />
-    <Compile Include="NativeFunctions.cs" />
     <Compile Include="OverlayForm.cs">
       <SubType>Form</SubType>
     </Compile>
