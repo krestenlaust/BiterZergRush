@@ -8,7 +8,10 @@ namespace OverlayEngine
     public static class Engine
     {
         public const int FrameInterval = 1000 / 60;
+        
         public static IntPtr WindowHandle { get; internal set; }
+        public static bool DrawDebugOutline = false;
+
         static readonly List<OverlayEntity> entitites = new List<OverlayEntity>();
         static readonly List<OverlayEntity> destroyedEntitites = new List<OverlayEntity>();
         static IGame gameInstance;
@@ -77,6 +80,11 @@ namespace OverlayEngine
                     Vector location = item.Location - new Vector(scaledWidth, scaledHeight) * 0.5f;
 
                     graphics.DrawImage(renderSprite, new RectangleF(location, scaledSize));
+
+                    if (!DrawDebugOutline)
+                    {
+                        continue;
+                    }
 
                     Vector borderLocation = location - new Vector(1, 1);
                     Pen borderPen = new Pen(Brushes.Red, 1)
