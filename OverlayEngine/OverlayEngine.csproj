@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Audio.cs" />
     <Compile Include="Engine.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="IGame.cs" />
     <Compile Include="OverlayEntity.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="NativeFunctions.cs" />
