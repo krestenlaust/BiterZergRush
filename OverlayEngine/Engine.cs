@@ -13,7 +13,7 @@ namespace OverlayEngine
         static readonly List<OverlayEntity> destroyedEntitites = new List<OverlayEntity>();
         static Game gameInstance;
         static DateTime previousTime;
-        
+
         public static void StartGameLoop(IGame game)
         {
             gameInstance = game;

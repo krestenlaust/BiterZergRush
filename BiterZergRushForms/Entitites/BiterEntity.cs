@@ -50,7 +50,8 @@ namespace BiterZergRushForms.Entities
         /// </summary>
         public float Rotation { get; set; } = 0;
 
-        public override Vector Location {
+        public override Vector Location
+        {
             get => internalLocation;
             set
             {
@@ -59,7 +60,8 @@ namespace BiterZergRushForms.Entities
             }
         }
 
-        public override Image GameSprite {
+        public override Image GameSprite
+        {
             get
             {
                 if (attacking)
@@ -178,7 +180,7 @@ namespace BiterZergRushForms.Entities
 
         public static class BiterAttackSpritesheet
         {
-            readonly static Spritesheet[] biterAttack;
+            static readonly Spritesheet[] biterAttack;
             private const int BiterAnimationFrameCount = 11;
 
             static BiterAttackSpritesheet()
@@ -204,7 +206,7 @@ namespace BiterZergRushForms.Entities
 
         public static class BiterRunSpritesheet
         {
-            readonly static Spritesheet[] biterRun;
+            static readonly Spritesheet[] biterRun;
             private const int BiterAnimationFrameCount = 16;
 
             static BiterRunSpritesheet()

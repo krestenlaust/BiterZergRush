@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace BiterZergRushForms
 {
@@ -41,7 +40,8 @@ namespace BiterZergRushForms
 
         public Bitmap this[int index]
         {
-            get {
+            get
+            {
                 return sprites[index];
             }
         }

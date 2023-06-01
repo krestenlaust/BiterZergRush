@@ -16,7 +16,7 @@ namespace OverlayEngine
         /// </returns>
         [DllImport("user32.dll")]
         public static extern IntPtr GetForegroundWindow();
-        
+
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool IsIconic(IntPtr hWnd);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OverlayEngine
@@ -48,7 +44,7 @@ namespace OverlayEngine
         void TimerGameLoop_Tick(object sender, EventArgs e)
         {
             Engine.UpdateGame();
-            
+
             // Redraw
             Invalidate();
         }

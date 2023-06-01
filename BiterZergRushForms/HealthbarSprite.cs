@@ -5,12 +5,11 @@ namespace BiterZergRushForms
 {
     public class HealthbarSprite
     {
-        const float redFraction     = 1/3f;
-        const float yellowFraction  = 2/3f;
-        const float greenFraction   = 3/3f;
+        const float redFraction = 1 / 3f;
+        const float yellowFraction = 2 / 3f;
 
-        readonly static Bitmap cellGrey, cellGreen, cellYellow, cellRed;
-        readonly static int cellSize;
+        static readonly Bitmap cellGrey, cellGreen, cellYellow, cellRed;
+        static readonly int cellSize;
 
         static HealthbarSprite()
         {

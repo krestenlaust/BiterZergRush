@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using Aud.IO;
-using Aud.IO.Formats;
 using OverlayEngine;
 
 namespace BiterZergRushForms.Entities

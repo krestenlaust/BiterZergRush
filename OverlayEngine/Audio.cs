@@ -1,9 +1,8 @@
-﻿using Aud.IO;
+﻿using System.IO;
+using Aud.IO;
 using Aud.IO.Formats;
 using FragLabs.Audio.Engines;
 using FragLabs.Audio.Engines.OpenAL;
-using System.IO;
-using System.Threading;
 
 namespace OverlayEngine
 {
@@ -14,7 +13,7 @@ namespace OverlayEngine
         public static void PlayAudio(AudioFile file)
         {
             playback = OpenALHelper.PlaybackDevices[0].OpenStream(file.SampleRate, OpenALAudioFormat.Stereo16Bit);
-            
+
             byte[] rawAudio = file.GetModulatedAudio();
 
             playback.Listener.Position = new Vector3() { X = 0.0f, Y = 0.0f, Z = 0.0f };
