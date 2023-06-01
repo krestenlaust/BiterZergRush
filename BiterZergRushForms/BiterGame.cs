@@ -50,22 +50,15 @@ namespace BiterZergRushForms
             {
                 controlledBiter.Location += new Vector(1 * manualMoveMultiplier, 0);
             }
-            else
-            {
-                return;
-            }
         }
 
         public void OnLoad()
         {
-            controlledBiter = new BiterEntity() { Location = spawnPoint };
+            controlledBiter = new BiterEntity(false) { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
-            //AudioFile file = Audio.LoadWaveFile(@"C:\Users\kress\Music\Dannys beskedlyd.wav");
-            //Audio.PlayAudio(file);
-
-            return;
-            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
-            Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
+            
+            //Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(10, 5) });
+            //Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
         }
 
         public void OnUpdate(float deltaSeconds)

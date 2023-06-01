@@ -37,12 +37,14 @@ namespace BiterZergRushForms.Entities
         float totalTravelTime = 0;
         float timeSinceWindowSelected = 0;
         bool attacking = false;
+        bool aiEnabled = true;
 
-        public BiterEntity()
+        public BiterEntity(bool aiEnabled=true)
         {
             Scale = 0.4f;
             MaxHealth = 10;
             Health = 10;
+            this.aiEnabled = aiEnabled;
         }
 
         /// <summary>
@@ -103,6 +105,20 @@ namespace BiterZergRushForms.Entities
         public override void OnUpdate(float deltaSeconds)
         {
             timeSinceFrameSwap += deltaSeconds;
+
+            // swap to next animation frame
+            if (timeSinceFrameSwap >= AnimationIntervalSecond)
+            {
+                timeSinceFrameSwap = 0;
+
+                animationIndex = (animationIndex + 1) % (attacking ? 11 : 16);
+            }
+
+            if (!aiEnabled)
+            {
+                return;
+            }
+
             timeSinceTargetSet += deltaSeconds;
             timeSinceWindowSelected += deltaSeconds;
 
@@ -118,14 +134,6 @@ namespace BiterZergRushForms.Entities
                 // reset lerp values
                 internalLocation = movementEnd;
                 movementStart = internalLocation;
-            }
-
-            // swap to next animation frame
-            if (timeSinceFrameSwap >= AnimationIntervalSecond)
-            {
-                timeSinceFrameSwap = 0;
-
-                animationIndex = (animationIndex + 1) % (attacking ? 11 : 16);
             }
 
             // choose new target

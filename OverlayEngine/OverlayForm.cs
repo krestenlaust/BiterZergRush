@@ -22,14 +22,14 @@ namespace OverlayEngine
             ClientSize = new System.Drawing.Size(1, 1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
-            //KeyPreview = true;
             Name = "OverlayForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.WindowsDefaultLocation;
             TopMost = true;
             Load += OverlayForm_Load;
-            //KeyDown += ;
-            //KeyUp += ;
+            KeyPreview = true;
+            KeyDown += (object _, KeyEventArgs e) => Engine.KeyDown(e);
+            KeyUp += (object _, KeyEventArgs e) => Engine.KeyUp(e);
             ResumeLayout(false);
         }
 
