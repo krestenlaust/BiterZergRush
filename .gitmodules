@@ -1,0 +1,3 @@
+[submodule "OpenAL.NET"]
+	path = OpenAL.NET
+	url = https://github.com/DevJohnC/OpenAL.NET

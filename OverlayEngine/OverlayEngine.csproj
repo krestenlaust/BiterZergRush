@@ -82,7 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenAL.NET\OpenAL.NET.csproj">
+    <ProjectReference Include="..\OpenAL.NET\OpenAL.NET\OpenAL.NET.csproj">
       <Project>{431fa8d8-d167-4f41-b567-6e17471e4245}</Project>
       <Name>OpenAL.NET</Name>
     </ProjectReference>

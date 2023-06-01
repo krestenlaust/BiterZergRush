@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiterZergRushForms", "BiterZergRushForms\BiterZergRushForms.csproj", "{9FD259E1-48AF-4A37-AFCF-979EBBC3AA3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverlayEngine", "OverlayEngine\OverlayEngine.csproj", "{E0447E14-E942-4377-8D3C-F5D0E3E4D8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAL.NET", "OpenAL.NET\OpenAL.NET.csproj", "{431FA8D8-D167-4F41-B567-6E17471E4245}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenAL.NET", "OpenAL.NET\OpenAL.NET\OpenAL.NET.csproj", "{431FA8D8-D167-4F41-B567-6E17471E4245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
