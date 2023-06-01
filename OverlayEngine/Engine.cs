@@ -11,7 +11,7 @@ namespace OverlayEngine
         public static IntPtr WindowHandle { get; internal set; }
         static readonly List<OverlayEntity> entitites = new List<OverlayEntity>();
         static readonly List<OverlayEntity> destroyedEntitites = new List<OverlayEntity>();
-        static Game gameInstance;
+        static IGame gameInstance;
         static DateTime previousTime;
 
         public static void StartGameLoop(IGame game)
