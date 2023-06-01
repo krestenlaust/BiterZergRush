@@ -8,7 +8,7 @@ using OverlayEngine;
 
 namespace BiterZergRushForms
 {
-    public class BiterGame : Game
+    public class BiterGame : IGame
     {
         const int manualMoveMultiplier = 50;
         readonly Dictionary<IntPtr, WindowEntity> windows = new Dictionary<IntPtr, WindowEntity>();
@@ -17,7 +17,7 @@ namespace BiterZergRushForms
         BiterEntity controlledBiter;
         float timeSinceLastRefreshedActiveWindow;
 
-        public override void OnKeyDown(KeyEventArgs keyEvent)
+        public void OnKeyDown(KeyEventArgs keyEvent)
         {
             if (keyEvent.KeyCode == Keys.Enter)
             {
@@ -25,7 +25,7 @@ namespace BiterZergRushForms
             }
         }
 
-        public override void OnKeyUp(KeyEventArgs keyEvent)
+        public void OnKeyUp(KeyEventArgs keyEvent)
         {
             if (keyEvent.KeyCode == Keys.Space)
             {
@@ -57,7 +57,7 @@ namespace BiterZergRushForms
             }
         }
 
-        public override void OnLoad()
+        public void OnLoad()
         {
             controlledBiter = new BiterEntity() { Location = spawnPoint };
             Engine.Instantiate(controlledBiter);
@@ -69,7 +69,7 @@ namespace BiterZergRushForms
             Engine.Instantiate(new BiterEntity() { Location = spawnPoint + new Vector(15, 15) });
         }
 
-        public override void OnUpdate(float deltaSeconds)
+        public void OnUpdate(float deltaSeconds)
         {
             timeSinceLastRefreshedActiveWindow += deltaSeconds;
 

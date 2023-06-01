@@ -9,7 +9,7 @@ namespace OverlayEngine
 {
     public class OverlayForm : Form
     {
-        private readonly Timer timerGameLoop;
+        readonly Timer timerGameLoop;
 
         public OverlayForm()
         {
@@ -37,7 +37,7 @@ namespace OverlayEngine
             ResumeLayout(false);
         }
 
-        private void OverlayForm_Load(object sender, EventArgs e)
+        void OverlayForm_Load(object sender, EventArgs e)
         {
             Bounds = Screen.PrimaryScreen.Bounds;
             WindowState = FormWindowState.Maximized;
@@ -45,7 +45,7 @@ namespace OverlayEngine
             timerGameLoop.Start();
         }
 
-        private void TimerGameLoop_Tick(object sender, EventArgs e)
+        void TimerGameLoop_Tick(object sender, EventArgs e)
         {
             Engine.UpdateGame();
             

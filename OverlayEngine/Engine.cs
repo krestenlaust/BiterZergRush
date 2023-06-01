@@ -14,7 +14,7 @@ namespace OverlayEngine
         static Game gameInstance;
         static DateTime previousTime;
         
-        public static void StartGameLoop(Game game)
+        public static void StartGameLoop(IGame game)
         {
             gameInstance = game;
             game.OnLoad();

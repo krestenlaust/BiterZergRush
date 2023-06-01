@@ -8,12 +8,12 @@ namespace BiterZergRushForms
     public static class Engine
     {
         public const int FrameInterval = 1000 / 60;
-        private static Game gameInstance;
+        static IGame gameInstance;
         static DateTime previousTime;
         static readonly List<GameEntity> entitites = new List<GameEntity>();
         static readonly List<GameEntity> destroyedEntitites = new List<GameEntity>();
 
-        public static void SetupGame(Game game)
+        public static void SetupGame(IGame game)
         {
             gameInstance = game;
             game.OnLoad();
